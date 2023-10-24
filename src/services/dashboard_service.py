@@ -60,7 +60,3 @@ class DashboardService(BaseService):
             self._update_item(item_service=item_service, request_model=request_model.item),
             self._update_user(user_service=user_service, request_model=request_model.user)
         )
-
-
-
-

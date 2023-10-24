@@ -28,7 +28,7 @@ async def get_entries(
     return ResponseDashboardFactory.get_from_users_and_items(users=users, items=items)
 
 
-@router.delete('/delete', response_model=ResponseEmpty)
+@router.delete('/', response_model=ResponseEmpty)
 async def delete_entry(
         user_id: int | None = Query(None),
         item_id: int | None = Query(None),
@@ -39,7 +39,7 @@ async def delete_entry(
     return ResponseEmpty()
 
 
-@router.patch('/update', response_model=ResponseEmpty)
+@router.patch('/', response_model=ResponseEmpty)
 async def update_entry(
         request_model: RequestUpdateEntry,
         dashboard_service: DashboardService = Depends(get_dashboard_service),
