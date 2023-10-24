@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
-from src.api.depends import get_user_id_from_token, get_auth_service
+from src.api.depends import get_auth_service
 from src.core.config import settings
 from src.schemas.v1.request.auth import RequestSignUp
 from src.schemas.v1.response.auth import ResponseToken
@@ -22,6 +22,7 @@ async def sign_in(
     return ResponseToken(
         access_token=user.get_access_token(secrets=settings.secrets)
     )
+
 
 @router.post('/sign-up', response_model=ResponseEmpty)
 async def sign_up(

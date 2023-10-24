@@ -10,7 +10,7 @@ class PSQLBaseRepository:
     def __init__(self, db: AsyncSession) -> None:
         self._db = db
 
-    async def one_or_none(self, query: Select) -> Any:
+    async def one_or_none_val(self, query: Select) -> Any:
         result = await self._db.execute(query)
         result = result.one_or_none()
         if not result:
@@ -25,6 +25,10 @@ class PSQLBaseRepository:
     async def add_model(self, model: BaseModel) -> None:
         self._db.add(model)
         await self._db.flush([model])
+
+    async def add_models(self, models: list[BaseModel]) -> None:
+        self._db.add_all(models)
+        await self._db.flush([*models])
 
     async def all_ones(self, query: Select) -> list[Any]:
         result = await self._db.execute(query)

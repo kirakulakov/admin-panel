@@ -1,22 +1,17 @@
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
-from alembic import context
 from sqlalchemy.engine import URL
 
 from src.core.config import settings
 from src.db.models.psql.base import Base
 
-from src.db.models.psql.user import DBUser
-from src.db.models.psql.item import DBItem
-
 config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
-
 
 target_metadata = Base.metadata
 db_settings = settings.psql
@@ -34,6 +29,7 @@ def get_url():
 
 
 config.set_main_option("sqlalchemy.url", get_url())
+
 
 def run_migrations_offline():
     url = config.get_main_option("sqlalchemy.url")

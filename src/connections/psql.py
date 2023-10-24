@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -8,9 +9,9 @@ from sqlalchemy.orm import sessionmaker
 from src.core.config import settings
 from src.utils.singleton import singleton
 
-
 Postgres: PSQL = ...
 session: AsyncSession = ...
+
 
 @singleton
 class PSQL:
@@ -25,7 +26,10 @@ class PSQL:
 
     async def test_async_database(self) -> None:
         async with self.async_session() as session:
-            await session.execute('SELECT 2')
+            try:
+                await session.execute('SELECT 2')
+            finally:
+                await session.close()
 
     async def get_async_session(self) -> AsyncSession:
         async with self.async_session() as session:

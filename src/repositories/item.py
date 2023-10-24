@@ -16,4 +16,4 @@ class ItemRepository(PSQLBaseRepository):
 
     async def get_by_id(self, id_: int) -> DBItem | None:
         query = select(DBItem).where(DBItem.id == id_)
-        return await self.one_or_none(query)
+        return await self.one_or_none_val(query)

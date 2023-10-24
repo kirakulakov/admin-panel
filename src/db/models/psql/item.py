@@ -1,9 +1,5 @@
-from datetime import datetime, timedelta
+from sqlalchemy import Column, VARCHAR, Integer, ForeignKey
 
-from jose import jwt
-from sqlalchemy import Column, VARCHAR, UniqueConstraint, Integer, ForeignKey
-
-from src.core.config import Secrets
 from src.db.models.psql.base import BaseModel
 
 

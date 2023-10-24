@@ -18,7 +18,6 @@ from src.services.dashboard_service import DashboardService
 from src.services.item_service import ItemService
 from src.services.user_service import UserService
 
-# TODO change url
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/v1/auth/sign-in")
 
 

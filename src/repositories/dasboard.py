@@ -1,11 +1,10 @@
-from sqlalchemy import select, delete
+from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.models.psql.item import DBItem
 from src.db.models.psql.user import DBUser
 from src.repositories.base import PSQLBaseRepository
-from src.schemas.v1.request.dashboard import RequestUpdateEntry
-from src.utils.async_helpers import gather_with_exception_handling
+from src.utils.async_helpers import gather_with_exc_handling
 
 
 class DashboardRepository(PSQLBaseRepository):
@@ -22,4 +21,4 @@ class DashboardRepository(PSQLBaseRepository):
         if item_id:
             query = delete(DBItem).where(DBItem.id == item_id)
             queries.append(self.execute_fetch(query))
-        await gather_with_exception_handling(*queries)
+        await gather_with_exc_handling(*queries)

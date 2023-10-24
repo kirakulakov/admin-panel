@@ -27,3 +27,26 @@ class RequestUpdateItem(RequestBase):
 class RequestUpdateEntry(RequestBase):
     user: RequestUpdateUser | None = Field(None)
     item: RequestUpdateItem | None = Field(None)
+
+
+class RequestAddUser(RequestBase):
+    login: str = Field(None)
+    password: str | None = Field(None)
+
+    @field_validator('password')
+    def hash_password(cls, value: str | None):
+        if not value:
+            return value
+
+        value = hash_password(value)
+        return value
+
+
+class RequestAddItem(RequestBase):
+    account_id: int = Field(...)
+    name: str = Field(...)
+
+
+class RequestAddEntry(RequestBase):
+    user: RequestAddUser | None = Field(None)
+    item: RequestAddItem | None = Field(None)

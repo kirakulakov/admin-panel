@@ -6,6 +6,7 @@ from h11 import Request
 
 from src.api.v1.router import router as v1_router
 from src.connections import psql
+from src.core.config import settings
 
 
 @asynccontextmanager
@@ -21,7 +22,13 @@ async def lifespan(app: FastAPI):
     await session.close()
 
 
-app = FastAPI(title='admin-panel', lifespan=lifespan, default_response_class=ORJSONResponse)
+app = FastAPI(
+    title='admin-panel',
+    lifespan=lifespan,
+    docs_url=settings.server.docs_url,
+    openapi_url=settings.server.openapi_url,
+    default_response_class=ORJSONResponse
+)
 
 app.include_router(v1_router, tags=['v1'])
 

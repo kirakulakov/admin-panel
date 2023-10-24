@@ -1,18 +1,34 @@
 from fastapi import HTTPException
 from starlette import status
 
+from src.db.models.psql.item import DBItemFactory, DBItem
+from src.db.models.psql.user import DBUserFactory, DBUser
 from src.repositories.dasboard import DashboardRepository
-from src.schemas.v1.request.dashboard import RequestUpdateEntry, RequestUpdateUser, RequestUpdateItem
+from src.schemas.v1.request.dashboard import RequestUpdateEntry, RequestUpdateUser, RequestUpdateItem, RequestAddEntry, \
+    RequestAddUser, RequestAddItem
 from src.services.base import BaseService
 from src.services.item_service import ItemService
 from src.services.user_service import UserService
-from src.utils.async_helpers import gather_with_exception_handling
+from src.utils.async_helpers import gather_with_exc_handling
 
 
 class DashboardService(BaseService):
     def __init__(self, repository: DashboardRepository):
         super().__init__(repository)
         self.repository = repository
+
+    async def get_entries(
+            self,
+            user_service: UserService,
+            item_service: ItemService,
+            limit: int,
+            offset: int
+    ) -> tuple[list[DBUser], list[DBItem]]:
+        users, items = await gather_with_exc_handling(
+            user_service.get_all(limit=limit, offset=offset),
+            item_service.get_all(limit=limit, offset=offset)
+        )
+        return users, items
 
     async def delete_entry(self, user_id: int | None, item_id: int | None) -> None:
         return await self.repository.delete_entry(user_id=user_id, item_id=item_id)
@@ -56,7 +72,36 @@ class DashboardService(BaseService):
             user_service: UserService,
             item_service: ItemService,
     ) -> None:
-        await gather_with_exception_handling(
+        await gather_with_exc_handling(
             self._update_item(item_service=item_service, request_model=request_model.item),
             self._update_user(user_service=user_service, request_model=request_model.user)
         )
+
+    async def _add_user(
+            self,
+            request_model: RequestAddUser | None = None
+    ) -> DBUser | None:
+        if request_model:
+            model: DBUser = DBUserFactory.create_new(login=request_model.login, password=request_model.password)
+            return model
+        return None
+
+    async def _add_item(
+            self,
+            request_model: RequestAddItem | None = None
+    ) -> DBItem | None:
+
+        if request_model:
+            model: DBItem = DBItemFactory.create_new(account_id=request_model.account_id, name=request_model.name)
+            return model
+        return None
+
+    async def add_entry(
+            self,
+            request_model: RequestAddEntry
+    ) -> None:
+        models = [
+            await self._add_item(request_model=request_model.item),
+            await self._add_user(request_model=request_model.user)
+        ]
+        await self.repository.add_models([model for model in models if model is not None])

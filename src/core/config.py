@@ -9,6 +9,8 @@ class Server(BaseModel):
     reload: bool = False
     proxy_headers: bool = False
     workers: int = 1
+    docs_url: str = '/docs'
+    openapi_url: str = '/openapi.json'
 
 
 class Psql(BaseModel):
