@@ -1,7 +1,7 @@
 # Run in Docker
 ```
 git clone git@github.com:kirakulakov/admin-panel.git \
-&& cd admin_panel \
+&& cd admin-panel \
 && docker build -t admin_panel -f ./docker/Dockerfile . \
 && cd docker \
 && docker compose up --build
