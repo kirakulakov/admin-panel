@@ -30,10 +30,3 @@ async def sign_up(
 ):
     await auth_service.sign_up(login=request_model.login, password=request_model.password)
     return ResponseEmpty()
-
-
-@router.get("/users/me/info")
-async def read_users_me(
-        user_id=Depends(get_user_id_from_token)
-):
-    return user_id

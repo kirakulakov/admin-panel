@@ -1,4 +1,4 @@
-from sqlalchemy import select, func
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.models.psql.item import DBItem
@@ -10,6 +10,6 @@ class ItemRepository(PSQLBaseRepository):
         super().__init__(db=db)
         self.db = db
 
-    async def get_all_count(self) -> int:
-        query = select(func.count(DBItem.id))
-        return await self.one_val(query)
+    async def get_all(self, limit: int, offset: int) -> list[DBItem]:
+        query = select(DBItem).limit(limit).offset(offset)
+        return await self.all_ones(query)

@@ -1,3 +1,4 @@
+from __future__ import annotations
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -7,8 +8,9 @@ from sqlalchemy.orm import sessionmaker
 from src.core.config import settings
 from src.utils.singleton import singleton
 
-session: AsyncSession = ...
 
+Postgres: PSQL = ...
+session: AsyncSession = ...
 
 @singleton
 class PSQL:
@@ -31,6 +33,15 @@ class PSQL:
 
     async def dispose(self) -> None:
         await self._async_engine.dispose()
+
+    async def commit_or_rollback(self) -> None:
+        try:
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
 
 
 class PSQLBuilder:

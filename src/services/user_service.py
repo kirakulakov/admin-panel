@@ -8,5 +8,5 @@ class UserService(BaseService):
         super().__init__(repository)
         self.repository = repository
 
-    async def get_count(self) -> int:
-        return await self.repository.get_all_count()
+    async def get_all(self, limit: int, offset: int) -> int:
+        return await self.repository.get_all(limit=limit, offset=offset)

@@ -19,6 +19,6 @@ class UserRepository(PSQLBaseRepository):
         result = await self.one_or_none(query)
         return result is not None
 
-    async def get_all_count(self) -> int:
-        query = select(func.count(DBUser.id))
-        return await self.one_val(query)
+    async def get_all(self, limit: int, offset: int) -> list[DBUser]:
+        query = select(DBUser).limit(limit).offset(offset)
+        return await self.all_ones(query)
