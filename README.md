@@ -16,9 +16,11 @@ git clone git@github.com:kirakulakov/admin-panel.git \
 
 ### Run server
 [Require `Python 3.10+` and `PSQL-client 13+` on your local machine]
-```
-python -m src
-```
+1. `Create virtual env`
+2. `Install deps from requirements.txt`
+3. `Create `.env` file or clone it from .env_example:`
+cp .env_example .env` 
+4. `python -m src`
 
 # swagger-docs
 
