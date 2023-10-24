@@ -13,7 +13,7 @@ git clone git@github.com:kirakulakov/admin-panel.git \
 
 # Local
 
-#### Запуск сервера
+### Run server
 [Require `Python 3.10+` and `PSQL-client 13+` on your local machine]
 ```
 python -m src
