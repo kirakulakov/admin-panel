@@ -23,15 +23,3 @@ class DashboardRepository(PSQLBaseRepository):
             query = delete(DBItem).where(DBItem.id == item_id)
             queries.append(self.execute_fetch(query))
         await gather_with_exception_handling(*queries)
-    #
-    #
-    # async def update_entry(self, request_model: RequestUpdateEntry) -> None:
-    #     queries = []
-    #     if user_id:
-    #         query = delete(DBUser).where(DBUser.id == user_id)
-    #         queries.append(self.execute_fetch(query))
-    #
-    #     if item_id:
-    #         query = delete(DBItem).where(DBItem.id == item_id)
-    #         queries.append(self.execute_fetch(query))
-    #     await gather_with_exception_handling(*queries)

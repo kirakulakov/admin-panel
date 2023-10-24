@@ -23,7 +23,7 @@ class AuthService(BaseService):
         return user
 
     async def sign_in(self, login: str, password: str) -> DBUser:
-        user = await self.repository.get_user_by_login(login=login)
+        user = await self.repository.get_by_login(login=login)
         if not user:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
         if not verify(password=password, user_hashed_password=user.password):

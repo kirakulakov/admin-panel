@@ -10,15 +10,15 @@ from src.connections import psql
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    _psql = await psql.PSQLBuilder.build()
-    psql.Postgres = _psql
+    psql.Postgres = await psql.PSQLBuilder.build()
 
-    async with _psql.async_session() as session:
+    async with psql.Postgres.async_session() as session:
         psql.session = session
+
     yield
 
-    await _psql.dispose()
-    await psql.session.close()
+    await psql.Postgres.dispose()
+    await session.close()
 
 
 app = FastAPI(title='admin-panel', lifespan=lifespan, default_response_class=ORJSONResponse)

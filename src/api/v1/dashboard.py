@@ -33,17 +33,20 @@ async def delete_entry(
         user_id: int | None = Query(None),
         item_id: int | None = Query(None),
         dashboard_service: DashboardService = Depends(get_dashboard_service),
-        _ = Depends(get_user_id_from_token),
+        _ = Depends(get_user_id_from_token)
 ):
     await dashboard_service.delete_entry(user_id=user_id, item_id=item_id)
     return ResponseEmpty()
 
 
-@router.delete('/update', response_model=ResponseEmpty)
+@router.patch('/update', response_model=ResponseEmpty)
 async def update_entry(
         request_model: RequestUpdateEntry,
         dashboard_service: DashboardService = Depends(get_dashboard_service),
-        _ = Depends(get_user_id_from_token),
+        user_service: UserService = Depends(get_user_service),
+        item_service: ItemService = Depends(get_item_service),
+        _ = Depends(get_user_id_from_token)
 ):
-    await dashboard_service.delete_entry(user_id=user_id, item_id=item_id)
+    await dashboard_service.update_entry(
+        request_model=request_model, user_service=user_service, item_service=item_service)
     return ResponseEmpty()

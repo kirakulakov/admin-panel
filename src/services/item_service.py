@@ -10,3 +10,6 @@ class ItemService(BaseService):
 
     async def get_all(self, limit: int, offset: int) -> list[DBItem]:
         return await self.repository.get_all(limit=limit, offset=offset)
+
+    async def get_by_id(self, id_: int) -> DBItem | None:
+        return await self.repository.get_by_id(id_=id_)
