@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  redis:
+    image: redis:7
+    container_name: redis
+    restart: always
+    networks:
+      - main_network
+
+  app:
+    image: wbmp_redis_stat
+    container_name: fast_api_server
+    depends_on:
+      - redis
+    restart: always
+    networks:
+      - main_network
+    command:
+      - serve
+
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: proxy_server
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - main_network
+    depends_on:
+      - app
+
+
+networks:
+  main_network:
