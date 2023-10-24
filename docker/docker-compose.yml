@@ -26,7 +26,10 @@ services:
       - main_network
     environment:
       admin_panel_psql__host: postgres
-      admin_panel_server__host: fast_api_server
+      admin_panel_server__host: 0.0.0.0
+      admin_panel_server__port: 8001
+      admin_panel_server__reload: False
+      admin_panel_server__proxy_headers: True
     depends_on:
       - postgres
 

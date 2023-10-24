@@ -11,10 +11,11 @@ WORKDIR $APP_DIR
 
 COPY ./requirements.txt ./requirements.txt
 COPY ./.env ./.env
+COPY ./alembic.ini ./alembic.ini
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./src ./src
 
-CMD python -m src
+CMD alembic upgrade head && python -m src
