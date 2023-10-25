@@ -5,7 +5,9 @@ git clone git@github.com:kirakulakov/admin-panel.git \
 && cp .env_example .env \
 && docker build -t admin_panel -f ./docker/Dockerfile . \
 && cd docker \
-&& docker compose up --build
+&& docker compose up --build -d \
+&& cd ..
+
 ```
 ### And go `127.0.0.1/docs` to see the docs!
 
