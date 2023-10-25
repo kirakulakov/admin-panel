@@ -35,7 +35,9 @@ app.include_router(v1_router, tags=['v1'])
 
 @app.middleware("http")
 async def http_middleware(request: Request, call_next):
-    response = await call_next(request)
-    await psql.Postgres.commit_or_rollback()
+    try:
+        response = await call_next(request)
+    finally:
+        await psql.Postgres.commit_or_rollback()
 
     return response
