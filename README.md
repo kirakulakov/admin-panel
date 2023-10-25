@@ -7,7 +7,6 @@ git clone git@github.com:kirakulakov/admin-panel.git \
 && cd docker \
 && docker compose up --build -d \
 && cd ..
-
 ```
 ### And go `127.0.0.1/docs` to see the docs!
 
