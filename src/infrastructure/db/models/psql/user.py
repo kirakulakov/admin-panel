@@ -4,7 +4,7 @@ from jose import jwt
 from sqlalchemy import Column, VARCHAR
 
 from src.core.config import Secrets
-from src.db.models.psql.base import BaseModel
+from src.infrastructure.db.models.psql.base import BaseModel
 
 
 class DBUser(BaseModel):

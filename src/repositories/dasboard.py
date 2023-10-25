@@ -1,8 +1,8 @@
 from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.db.models.psql.item import DBItem
-from src.db.models.psql.user import DBUser
+from src.infrastructure.db.models.psql.item import DBItem
+from src.infrastructure.db.models.psql.user import DBUser
 from src.repositories.base import PSQLBaseRepository
 from src.utils.async_helpers import gather_with_exc_handling
 

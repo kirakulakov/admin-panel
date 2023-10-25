@@ -1,8 +1,8 @@
 from fastapi import HTTPException
 from starlette import status
 
-from src.db.models.psql.item import DBItemFactory, DBItem
-from src.db.models.psql.user import DBUserFactory, DBUser
+from src.infrastructure.db.models.psql.item import DBItemFactory, DBItem
+from src.infrastructure.db.models.psql.user import DBUserFactory, DBUser
 from src.repositories.dasboard import DashboardRepository
 from src.schemas.v1.request.dashboard import RequestUpdateEntry, RequestUpdateUser, RequestUpdateItem, RequestAddEntry, \
     RequestAddUser, RequestAddItem

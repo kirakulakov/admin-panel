@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.db.models.psql.item import DBItem
+from src.infrastructure.db.models.psql.item import DBItem
 from src.repositories.base import PSQLBaseRepository
 
 

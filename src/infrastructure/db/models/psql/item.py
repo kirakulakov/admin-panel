@@ -1,6 +1,6 @@
 from sqlalchemy import Column, VARCHAR, Integer, ForeignKey
 
-from src.db.models.psql.base import BaseModel
+from src.infrastructure.db.models.psql.base import BaseModel
 
 
 class DBItem(BaseModel):

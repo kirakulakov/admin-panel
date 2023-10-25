@@ -3,7 +3,7 @@ from typing import Any
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql import Select, Delete
 
-from src.db.models.psql.base import BaseModel
+from src.infrastructure.db.models.psql.base import BaseModel
 
 
 class PSQLBaseRepository:

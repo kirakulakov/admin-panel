@@ -5,7 +5,7 @@ from fastapi.responses import ORJSONResponse
 from h11 import Request
 
 from src.api.v1.router import router as v1_router
-from src.connections import psql
+from src.infrastructure.connections import psql
 from src.core.config import settings
 
 

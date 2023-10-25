@@ -1,4 +1,4 @@
-from src.db.models.psql.item import DBItem
+from src.infrastructure.db.models.psql.item import DBItem
 from src.repositories.item import ItemRepository
 from src.services.base import BaseService
 

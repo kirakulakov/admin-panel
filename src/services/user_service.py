@@ -1,4 +1,4 @@
-from src.db.models.psql.user import DBUser
+from src.infrastructure.db.models.psql.user import DBUser
 from src.repositories.user import UserRepository
 from src.services.base import BaseService
 

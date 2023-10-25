@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from sqlalchemy.engine import URL
 
 from src.core.config import settings
-from src.db.models.psql.base import Base
+from src.infrastructure.db.models.psql.base import Base
 
 config = context.config
 

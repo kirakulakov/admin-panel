@@ -1,7 +1,7 @@
 from pydantic import Field
 
-from src.db.models.psql.item import DBItem
-from src.db.models.psql.user import DBUser
+from src.infrastructure.db.models.psql.item import DBItem
+from src.infrastructure.db.models.psql.user import DBUser
 from src.schemas.v1.response.base import ResponseBase
 
 

@@ -8,8 +8,8 @@ from jose import jwt, JWTError
 from pydantic import BaseModel
 from starlette import status
 
-from src.connections.psql import get_session
 from src.core.config import settings
+from src.infrastructure.connections.psql import get_session
 from src.repositories.dasboard import DashboardRepository
 from src.repositories.item import ItemRepository
 from src.repositories.user import UserRepository

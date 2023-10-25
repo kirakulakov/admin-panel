@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from starlette import status
 
-from src.db.models.psql.user import DBUser, DBUserFactory
+from src.infrastructure.db.models.psql.user import DBUser, DBUserFactory
 from src.repositories.user import UserRepository
 from src.services.base import BaseService
 from src.utils.security import verify
