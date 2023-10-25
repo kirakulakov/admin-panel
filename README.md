@@ -1,3 +1,26 @@
+# Admin Panel
+
+```mermaid
+sequenceDiagram
+    actor Client
+    participant Proxy-server
+    participant FastAPI-server
+    participant Psql-server
+
+    autonumber
+
+    Client->>Proxy-server: Request
+    Proxy-server->>FastAPI-server: Проксирование запроса к FastAPI-серверу
+    FastAPI-server->>Psql-server: Запрос данных из базы
+    activate Psql-server
+    Psql-server-->>FastAPI-server: Возврат результата
+    deactivate Psql-server
+    FastAPI-server-->>Proxy-server: Возврат результата
+    Proxy-server-->>Client: Response
+
+
+```
+
 # Run in Docker
 ```
 git clone git@github.com:kirakulakov/admin-panel.git \
